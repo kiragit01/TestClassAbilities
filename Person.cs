@@ -15,8 +15,8 @@ namespace Maga_test
 
         public Person(string name, string firstName, DateTime birthday)
         {
-            Name = name;
-            FirstName = firstName;
+            Name = String.IsNullOrEmpty(name) ? "???" : name;
+            FirstName = String.IsNullOrEmpty(firstName) ? "???" : firstName;
             Birthday = birthday;
             Age = (int)Math.Floor((DateTime.Now - birthday).TotalDays / 365.2425);
         }
