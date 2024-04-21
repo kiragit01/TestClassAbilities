@@ -26,11 +26,13 @@ namespace Maga_test
                     case 'х':
                         WriteActionList();
                         break;
+                    case 'у':
+                        DeletePersons();
+                        break;
                 }
                 Console.WriteLine();
                 action = char.Parse(Console.ReadLine().ToLower());
             }
-            
             Console.ReadKey();
         }
 
@@ -38,8 +40,10 @@ namespace Maga_test
         {
             Console.WriteLine("А - добавить пользователя");
             Console.WriteLine("П - показать всех пользователей");
+            Console.WriteLine("У - удалить пользователя");
             Console.WriteLine("Х - лист действий");
             Console.WriteLine("В - выход");
+            Console.WriteLine();
         }
 
         static void AllPersons()
@@ -53,6 +57,19 @@ namespace Maga_test
         }
 
 
+        static void DeletePersons()
+        {
+            for (int i = 0; i < persons.Count; i++)
+            {
+                Console.WriteLine($"{i+1}. {persons[i].FirstName} {persons[i].Name}");
+            }
+            Console.Write("Введите номер пользователя, которого хотите удалить: ");
+            int num = int.Parse(Console.ReadLine()) - 1;
+            persons.RemoveAt(num);
+            Console.WriteLine("Пользователь успешно удалён!");
+        }
+
+
         static void AddPerson()
         {
             try
@@ -62,7 +79,14 @@ namespace Maga_test
                 Console.Write("Фамилия: ");
                 string firstname = Console.ReadLine();
                 Console.Write("Дата рождения (день.месяц.год): ");
-                DateTime dateTime = DateTime.Parse(Console.ReadLine());
+                string date = Console.ReadLine();
+                while(!DateTime.TryParse(date, out DateTime datetime))
+                {
+                    Console.WriteLine("Дата введена неверно. Введите заново.");
+                    Console.Write("Дата рождения (день.месяц.год): ");
+                    date = Console.ReadLine();
+                }
+                DateTime dateTime = DateTime.Parse(date);
                 Console.WriteLine("Пользователь успешно добавлен!");
                 Person person = new Person(name, firstname, dateTime);
                 persons.Add(person);

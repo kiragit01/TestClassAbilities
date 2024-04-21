@@ -22,7 +22,7 @@ namespace Maga_test
         }
         public string Print()
         {
-            return $"└--- {FirstName} {Name} {Birthday.ToShortDateString()} {Age}";
+            return $"└--- {FirstName} {Name} || {Birthday.ToShortDateString()} || {Age} лет";
         }
     }
 }
